@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "جستجو";
+}
+
+<section class="page-intro">
+    <p class="eyebrow">جستجو</p>
+    <h1>نتایج جستجو</h1>
+</section>
+
+<section class="panel">
+    <p>در نسخه فعلی، جستجوی عمومی برای صفحات و محتوای منتشرشده به‌صورت آماده برای توسعه قرار دارد.</p>
+    @if (!string.IsNullOrWhiteSpace((string?)ViewBag.Query))
+    {
+        <p><strong>عبارت جستجو:</strong> @ViewBag.Query</p>
+    }
+</section>

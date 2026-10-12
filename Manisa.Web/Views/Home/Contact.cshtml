@@ -1,0 +1,74 @@
+@model Manisa.Web.ViewModels.ContactPageViewModel
+@{
+    ViewData["Title"] = "تماس با ما";
+}
+
+<section class="page-intro">
+    <p class="eyebrow">ارتباط</p>
+    <h1>تماس با مانیسا</h1>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <div class="alert-box success">@Model.Message</div>
+}
+
+<section class="contact-layout">
+    <div class="panel contact-info">
+        <h3>اطلاعات تماس</h3>
+        <ul class="contact-list">
+            <li><strong>آدرس:</strong> @Model.Address</li>
+            <li><strong>تلفن همراه:</strong> @Model.PrimaryPhone</li>
+            <li><strong>تلفن همراه:</strong> @Model.SecondaryPhone</li>
+            <li><strong>تلفن ثابت:</strong> @Model.Landline</li>
+            <li><strong>اینستاگرام:</strong> <a href="@Model.InstagramUrl" target="_blank" rel="noreferrer">@Model.InstagramUrl</a></li>
+        </ul>
+    </div>
+
+    <div class="panel form-panel">
+        <h3>درخواست همکاری</h3>
+        <form asp-controller="Lead" asp-action="Create" method="post" class="lead-form">
+            @Html.AntiForgeryToken()
+            <input asp-for="LeadForm.Honeypot" class="hidden-field" tabindex="-1" autocomplete="off" />
+
+            <div class="field-row">
+                <label asp-for="LeadForm.FullName">نام و نام خانوادگی</label>
+                <input asp-for="LeadForm.FullName" />
+                <span asp-validation-for="LeadForm.FullName" class="text-danger"></span>
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.MobileNumber">شماره موبایل</label>
+                <input asp-for="LeadForm.MobileNumber" />
+                <span asp-validation-for="LeadForm.MobileNumber" class="text-danger"></span>
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.BusinessType">نوع کسب‌وکار</label>
+                <select asp-for="LeadForm.BusinessType" asp-items="Html.GetEnumSelectList<Manisa.Web.Models.BusinessType>()"></select>
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.City">شهر</label>
+                <input asp-for="LeadForm.City" />
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.ProductInterest">محصول یا دسته‌بندی موردنظر</label>
+                <input asp-for="LeadForm.ProductInterest" />
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.QuantityRange">محدوده تعداد</label>
+                <input asp-for="LeadForm.QuantityRange" />
+            </div>
+            <div class="field-row">
+                <label asp-for="LeadForm.Message">پیام</label>
+                <textarea asp-for="LeadForm.Message" rows="4"></textarea>
+            </div>
+            <input asp-for="LeadForm.SourcePage" type="hidden" />
+            <input asp-for="LeadForm.Campaign" type="hidden" />
+
+            <button class="primary-button" type="submit">ثبت درخواست</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

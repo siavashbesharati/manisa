@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "محصولات";
+}
+
+<section class="page-intro">
+    <p class="eyebrow">مجموعه‌ها</p>
+    <h1>محصولات و دسته‌بندی‌ها</h1>
+</section>
+
+<section class="category-grid">
+    @foreach (var category in (string[])ViewBag.Categories)
+    {
+        <article class="category-card">
+            <h3>@category</h3>
+            <p>مجموعه‌ای از محصولات اختصاصی با تمرکز بر لباس شب و پوشاک ویژه.</p>
+            <a asp-action="ProductDetail" asp-route-slug="@category">مشاهده جزئیات</a>
+        </article>
+    }
+</section>

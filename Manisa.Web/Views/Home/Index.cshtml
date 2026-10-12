@@ -1,0 +1,87 @@
+@model Manisa.Web.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+<section class="hero-card">
+    <div>
+        <p class="eyebrow">برند مانیسا</p>
+        <h1>@Model.BrandName</h1>
+        <p class="lead-text">@Model.BrandDescription</p>
+    </div>
+    <div class="hero-metrics">
+        <div class="metric-box">
+            <span>سررسیدها</span>
+            <strong>@Model.NewLeads</strong>
+        </div>
+        <div class="metric-box">
+            <span>در پیگیری</span>
+            <strong>@Model.FollowUpLeads</strong>
+        </div>
+        <div class="metric-box">
+            <span>تبدیل‌شده</span>
+            <strong>@Model.ConvertedLeads</strong>
+        </div>
+    </div>
+</section>
+
+<section class="grid grid-3">
+    <article class="panel">
+        <p class="panel-label">تاریخ تاسیس</p>
+        <h3>@Model.FoundedYear</h3>
+        <small>از سال ۲۰۱۷ در بازار بزرگ تهران</small>
+    </article>
+    <article class="panel">
+        <p class="panel-label">اینستاگرام</p>
+        <h3>مانیسا</h3>
+        <a href="@Model.InstagramUrl" target="_blank" rel="noreferrer">@Model.InstagramUrl</a>
+    </article>
+    <article class="panel">
+        <p class="panel-label">آدرس</p>
+        <h3>کارخانه و دفتر</h3>
+        <small>@Model.Address</small>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="section-heading">
+        <h2>پیش‌نمایش آخرین لیدها</h2>
+        <a asp-controller="Admin" asp-action="Index">مدیریت</a>
+    </div>
+
+    @if (Model.RecentLeads.Any())
+    {
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>شهر</th>
+                        <th>نوع کسب‌وکار</th>
+                        <th>وضعیت</th>
+                        <th>تاریخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lead in Model.RecentLeads)
+                    {
+                        <tr>
+                            <td>@lead.FullName</td>
+                            <td>@lead.City</td>
+                            <td>@lead.BusinessType</td>
+                            <td>@lead.Status</td>
+                            <td>@lead.CreatedAtUtc.ToString("yyyy/MM/dd")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <p>هنوز لیدی ثبت نشده است.</p>
+        </div>
+    }
+</section>
+

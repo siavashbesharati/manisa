@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Manisa.Tests/Manisa.Tests.csproj" />
+  <Project Path="Manisa.Web/Manisa.Web.csproj" />
+</Solution>

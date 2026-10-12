@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="مانیسا — تولید و تامین پوشاک شب و لباس اختصاصی برای فروشگاه‌ها و بوتیک‌ها." />
+    <title>@ViewData["Title"] - مانیسا</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="brand" asp-controller="Home" asp-action="Index">
+                    <span class="brand-mark">M</span>
+                    <span>مانیسا</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="منو">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">داشبورد</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">درباره ما</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Factory">کارخانه</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Products">محصولات</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">تماس</a></li>
+                        <li class="nav-item"><a class="nav-link cta" asp-controller="Home" asp-action="RequestQuote">درخواست قیمت</a></li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="app-shell">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h4>مانیسا</h4>
+                <p>تولید و تامین پوشاک شب و لباس‌های اختصاصی برای بوتیک‌ها و فروشگاه‌ها.</p>
+            </div>
+            <div>
+                <h5>ارتباط</h5>
+                <p>تلفن: 09903717036</p>
+                <p>تلفن ثابت: 021-66475033</p>
+            </div>
+            <div>
+                <h5>آدرس</h5>
+                <p>تهران، میدان خراسان، خیابان ۱۷ شهریور، خیابان رضایی، کوچه صادقی، پلاک ۳۴</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

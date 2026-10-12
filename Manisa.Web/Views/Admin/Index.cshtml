@@ -1,0 +1,57 @@
+@model Manisa.Web.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "داشبورد مدیریت";
+}
+
+<section class="page-intro">
+    <p class="eyebrow">بخش مدیریت</p>
+    <h1>داشبورد مانیسا</h1>
+</section>
+
+<section class="grid grid-4">
+    <article class="panel metric-card">
+        <span>کل لیدها</span>
+        <strong>@Model.TotalLeads</strong>
+    </article>
+    <article class="panel metric-card">
+        <span>جدید</span>
+        <strong>@Model.NewLeads</strong>
+    </article>
+    <article class="panel metric-card">
+        <span>در پیگیری</span>
+        <strong>@Model.FollowUpLeads</strong>
+    </article>
+    <article class="panel metric-card">
+        <span>تبدیل‌شده</span>
+        <strong>@Model.ConvertedLeads</strong>
+    </article>
+</section>
+
+<section class="panel">
+    <h2>آخرین لیدها</h2>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>شماره</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ</th>
+                    <th>نمونه</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lead in Model.RecentLeads)
+                {
+                    <tr>
+                        <td>@lead.FullName</td>
+                        <td>@lead.MobileNumber</td>
+                        <td>@lead.Status</td>
+                        <td>@lead.CreatedAtUtc.ToString("yyyy/MM/dd")</td>
+                        <td>@(lead.IsDemo ? "بله" : "خیر")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
