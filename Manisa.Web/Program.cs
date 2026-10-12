@@ -10,7 +10,7 @@ var appDataPath = Environment.GetEnvironmentVariable("MANISA_DB_PATH")
     ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Manisa", "manisa.db");
 
 Directory.CreateDirectory(Path.GetDirectoryName(appDataPath) ?? Directory.GetCurrentDirectory());
-var connectionString = $"Data Source={appDataPath};Cache=Shared;Foreign Keys=True;Journal Mode=WAL;Busy Timeout=5000;";
+var connectionString = $"Data Source={appDataPath};Cache=Shared;Foreign Keys=True;Default Timeout=5;";
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.Migrate();
+    await dbContext.Database.ExecuteSqlRawAsync("PRAGMA journal_mode=WAL;");
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
